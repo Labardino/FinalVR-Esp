@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +14,6 @@ public class Test : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //HOLAAA TEEEST
+
     }
 }
