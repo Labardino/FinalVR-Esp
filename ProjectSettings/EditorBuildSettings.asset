@@ -6,8 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/Game.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 8f097dec470b13f40b49a59630bfd30c, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 40338763e9d22b34aaada406579d3c88, type: 2}
+    xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: bf913c834ff3e804197365c4d2f892c2, type: 2}
