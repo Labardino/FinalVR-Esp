@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Oculus.Voice.Windows;
 
 public class Arrow : MonoBehaviour
 {
@@ -12,10 +13,10 @@ public class Arrow : MonoBehaviour
     private float arrowSpeed = 1000f;
 
     public Test testo;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
-        
+        lastPos = this.transform.position;
     }
 
     private void FixedUpdate()
@@ -24,17 +25,19 @@ public class Arrow : MonoBehaviour
             return;
         rb.MoveRotation(Quaternion.LookRotation(rb.velocity, transform.up));
 
-        if (Physics.Linecast(lastPos, arrowTip.position, LayerMask.NameToLayer("Bow")))
+        RaycastHit hit;
+        if (Physics.Linecast(lastPos, arrowTip.position, out hit, LayerMask.NameToLayer("Bow")))
         {
-            StopMoving();
+            StopMoving(hit.collider.gameObject);
         }
-
         lastPos = arrowTip.position;
     }
 
-    void StopMoving()
+    void StopMoving(GameObject objectHit)
     {
         stopped = true;
+
+        this.transform.parent = objectHit.transform;
         rb.isKinematic = true;
         rb.useGravity = false;
 
@@ -46,6 +49,10 @@ public class Arrow : MonoBehaviour
     //    rb.isKinematic = true;
     //    rb.useGravity = false;
     //}
+    void CheckForDamage(GameObject objectHit)
+    {
+
+    }
     public void FireArrow()
     {
         stopped = false;
@@ -60,6 +67,6 @@ public class Arrow : MonoBehaviour
         GrabArrow.arrowGrabbed = false;
         ShootingLogic.currentArrow = null;
 
-        Destroy(this.gameObject, 5.0f);
+        Destroy(this.gameObject, 8.0f);
     }
 }
