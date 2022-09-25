@@ -20,6 +20,8 @@ public class BowAnim : MonoBehaviour
         else
         {
             anim.SetFloat("Blend", 0);
+            if(ShootingLogic.currentArrow)
+                Destroy(ShootingLogic.currentArrow);
         }
     }
 

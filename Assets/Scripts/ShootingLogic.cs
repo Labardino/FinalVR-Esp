@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ShootingLogic : MonoBehaviour
 {
-    public GameObject hey;
-    public static bool isShooting;
+    public static GameObject currentArrow;
+    public static bool isShooting, arrowLoaded;
+    public Transform stringNotch;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +29,24 @@ public class ShootingLogic : MonoBehaviour
         {
             if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
             {
-                isShooting = true;
+            }
+            if(OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
+            {
+                arrowLoaded = isShooting = true;
+
+                GameObject parent = other.gameObject.transform.parent.gameObject;
+                other.gameObject.transform.SetAsLastSibling();
+                currentArrow = parent.transform.GetChild(0).gameObject;
+                if (currentArrow.name != other.gameObject.name)
+                {
+                    currentArrow.transform.up = -this.transform.forward;
+                    currentArrow.transform.position = stringNotch.transform.position;
+                    currentArrow.transform.parent = stringNotch;
+                }
+                else
+                {
+                    currentArrow = null;
+                }
             }
         }
     }
