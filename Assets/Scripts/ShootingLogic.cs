@@ -5,20 +5,22 @@ using UnityEngine;
 public class ShootingLogic : MonoBehaviour
 {
     public static GameObject currentArrow;
-    public static bool isShooting, arrowLoaded;
+    public static bool arrowLoaded = false, arrowShot;
     public Transform stringNotch;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Arrow arrowScript;
 
     // Update is called once per frame
     void Update()
     {
         if (!OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
         {
-            isShooting = false;
+            if (arrowScript && arrowLoaded)
+            {
+                arrowScript.FireArrow();
+            }
+            arrowLoaded = false;
+            arrowShot = true;
+
         }
     }
 
@@ -27,21 +29,16 @@ public class ShootingLogic : MonoBehaviour
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
-            {
-            }
             if(OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
             {
-                arrowLoaded = isShooting = true;
+                arrowLoaded = true;
 
-                GameObject parent = other.gameObject.transform.parent.gameObject;
-                other.gameObject.transform.SetAsLastSibling();
-                currentArrow = parent.transform.GetChild(0).gameObject;
-                if (currentArrow.name != other.gameObject.name)
+                if (currentArrow.gameObject.GetInstanceID() != other.gameObject.GetInstanceID())
                 {
-                    currentArrow.transform.up = -this.transform.forward;
+                    currentArrow.transform.forward = -this.transform.forward;
                     currentArrow.transform.position = stringNotch.transform.position;
                     currentArrow.transform.parent = stringNotch;
+                    arrowScript = currentArrow.GetComponent<Arrow>();
                 }
                 else
                 {
@@ -51,14 +48,14 @@ public class ShootingLogic : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
-        { 
-            if (!OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
-            {
-                isShooting = false;
-            }
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+    //    { 
+    //        if (!OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
+    //        {
+    //            arrowLoaded = false;
+    //        }
+    //    }
+    //}
 }

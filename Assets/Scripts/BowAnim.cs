@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class BowAnim : MonoBehaviour
 {
     public Animator anim;
     public Transform start, end;
     public Vector3 dist, direction;
-    public float blendValue;
+    public static float blendValue;
 
     // Update is called once per frame
     void Update()
     {
-        if(ShootingLogic.isShooting)
+        if(ShootingLogic.arrowLoaded)
         {
             blendValue = Mathf.Clamp(PullBow(), 0.0f, 1.0f);
             anim.SetFloat("Blend", blendValue);
@@ -20,8 +19,6 @@ public class BowAnim : MonoBehaviour
         else
         {
             anim.SetFloat("Blend", 0);
-            if(ShootingLogic.currentArrow)
-                Destroy(ShootingLogic.currentArrow);
         }
     }
 

@@ -1,22 +1,65 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Arrow : MonoBehaviour
 {
-    public Transform bowPos;
+    public Transform arrowTip;
+    public Rigidbody rb;
+    private Vector3 lastPos = Vector3.zero;
+    private bool stopped;
+    private float arrowSpeed = 1000f;
+
+    public Test testo;
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        if(ShootingLogic.arrowLoaded)
+        if (stopped)
+            return;
+        rb.MoveRotation(Quaternion.LookRotation(rb.velocity, transform.up));
+
+        if (Physics.Linecast(lastPos, arrowTip.position, LayerMask.NameToLayer("Bow")))
         {
-            this.transform.position = new Vector3(bowPos.position.x, bowPos.position.y, this.transform.position.z);
+            StopMoving();
         }
+
+        lastPos = arrowTip.position;
+    }
+
+    void StopMoving()
+    {
+        stopped = true;
+        rb.isKinematic = true;
+        rb.useGravity = false;
+
+    }
+    //IEnumerator StopArrow()
+    //{
+    //    yield return new WaitForSeconds(1f);
+    //    stopped = true;
+    //    rb.isKinematic = true;
+    //    rb.useGravity = false;
+    //}
+    public void FireArrow()
+    {
+        stopped = false;
+        this.transform.parent = null;
+        this.rb.isKinematic = false;
+        this.rb.useGravity = true;
+
+        rb.AddForce(transform.forward * (BowAnim.blendValue * arrowSpeed));
+        testo = FindObjectOfType<Test>();
+        testo.CustomDebug();
+
+        GrabArrow.arrowGrabbed = false;
+        ShootingLogic.currentArrow = null;
+
+        Destroy(this.gameObject, 5.0f);
     }
 }

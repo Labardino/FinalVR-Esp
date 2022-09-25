@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GrabArrow : MonoBehaviour
 {
-    bool arrowGrabbed;
+    public static bool arrowGrabbed;
     public GameObject arrowPrefab;
     public Transform vrHand;
     // Start is called before the first frame update
@@ -21,12 +21,16 @@ public class GrabArrow : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (!arrowGrabbed)
         {
-            if (OVRInput.GetDown(OVRInput.RawButton.RHandTrigger))
+            if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                GameObject arrowObject = Instantiate(arrowPrefab, vrHand);
-                arrowGrabbed = true;
+                if (OVRInput.GetDown(OVRInput.RawButton.RHandTrigger))
+                {
+                    GameObject arrowObject = Instantiate(arrowPrefab, vrHand);
+                    ShootingLogic.currentArrow = arrowObject;
+                    arrowGrabbed = true;
+                }
             }
         }
     }
