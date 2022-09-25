@@ -938,7 +938,7 @@ GameObject:
   - component: {fileID: 710552839}
   - component: {fileID: 710552838}
   m_Layer: 5
-  m_Name: Image
+  m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -989,7 +989,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0.5
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -1251,6 +1251,7 @@ GameObject:
   - component: {fileID: 1482992455}
   - component: {fileID: 1482992454}
   - component: {fileID: 1482992453}
+  - component: {fileID: 1482992457}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -1337,6 +1338,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1482992457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482992451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d06fd131b547ae4f8d3681b1a2c316a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texto: {fileID: 0}
+  imago: {fileID: 710552838}
+  testo: {fileID: 0}
 --- !u!1 &2111933705
 GameObject:
   m_ObjectHideFlags: 0
