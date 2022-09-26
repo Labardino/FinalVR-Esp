@@ -2,8 +2,8 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    void Damage(int amount);
-    void UpdateLife(int amount);
+    void Damage(float amount);
+    void LifeChange(float amount);
 
     void CheckDeath();
 }

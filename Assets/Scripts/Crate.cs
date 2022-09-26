@@ -6,35 +6,33 @@ using UnityEngine.UI;
 public class Crate : MonoBehaviour, IDamageable
 {
     private float maxHealth = 100, currentHealth;
-    private Image imago;
+    public Image imago;
 
-    public Test testo;
-
+    //public Test testo;
 
     private void Start()
     {
         currentHealth = maxHealth;
         imago.fillAmount = 1;
-        testo = FindObjectOfType<Test>();
-
-    }
-    private void Update()
-    {
-        testo.CustomDebug((currentHealth).ToString());
-
     }
 
-    public void Damage(int amount)
+    public void Damage(float amount)
     {
+
+        LifeChange(amount);
+        CheckDeath();
+    }
+
+    public void LifeChange(float amount)
+    {
+        currentHealth -= amount;
+        imago.fillAmount = currentHealth / maxHealth;
+        //testo = FindObjectOfType<Test>();
+
+        //testo.CustomDebug((currentHealth).ToString());
         TurnRed();
-        UpdateLife(amount);
-        //CheckDeath();
-    }
 
-    public void UpdateLife(int amount)
-    {
-        currentHealth = currentHealth -  amount;
-        imago.fillAmount = currentHealth/maxHealth;
+
     }
 
     public void CheckDeath()
