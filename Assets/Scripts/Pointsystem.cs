@@ -26,6 +26,6 @@ public class Pointsystem : MonoBehaviour
 
     public void PointUpdateUI()
     {
-        pointText.text = "Points: " + totalPoints.ToString();
+        pointText.text = "Points: " + totalPoints.ToString("F3");
     }
 }

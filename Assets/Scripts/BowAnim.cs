@@ -4,7 +4,7 @@ using UnityEngine;
 public class BowAnim : MonoBehaviour
 {
     public Animator anim;
-    public Transform start, end;
+    public Transform start, end, mid;
     public Vector3 dist, direction;
     public static float blendValue;
 
@@ -15,6 +15,7 @@ public class BowAnim : MonoBehaviour
         {
             blendValue = Mathf.Clamp(PullBow(), 0.0f, 1.0f);
             anim.SetFloat("Blend", blendValue);
+
         }
         else
         {
@@ -30,5 +31,13 @@ public class BowAnim : MonoBehaviour
 
         dist = this.transform.position - start.position;
         return Vector3.Dot(dist, direction) / magnitude;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.transform.gameObject == mid.transform.gameObject && ShootingLogic.arrowLoaded)
+        {
+            FindObjectOfType<AudioManager>().Play("tenseBow");
+        }
     }
 }

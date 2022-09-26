@@ -7,7 +7,7 @@ public class DropEnemies : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("GetEnemy", 5.0f, 5.0f);
+        InvokeRepeating("GetEnemy", 4.0f, 4.5f);
     }
 
     public void GetEnemy()

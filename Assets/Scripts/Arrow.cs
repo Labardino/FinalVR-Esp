@@ -9,7 +9,7 @@ public class Arrow : MonoBehaviour
     public Rigidbody rb;
     private Vector3 lastPos = Vector3.zero;
     private bool stopped;
-    private float arrowSpeed = 2000f;
+    private float arrowSpeed = 1500f;
 
 
     private void Start()
@@ -54,7 +54,6 @@ public class Arrow : MonoBehaviour
             {
                 IDamageable damageable = (IDamageable)behaviour;
                 damageable.Damage(50);
-
                 break;
             }
         }
@@ -73,7 +72,7 @@ public class Arrow : MonoBehaviour
 
         GrabArrow.arrowGrabbed = false;
         ShootingLogic.currentArrow = null;
-
-        Destroy(this.gameObject, 8.0f);
+        FindObjectOfType<AudioManager>().Play("Arrow");
+        Destroy(this.gameObject, 4.0f);
     }
 }

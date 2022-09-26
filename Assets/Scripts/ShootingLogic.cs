@@ -31,14 +31,13 @@ public class ShootingLogic : MonoBehaviour
         {
             if(OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
             {
-                arrowLoaded = true;
-
                 if (currentArrow.gameObject.GetInstanceID() != other.gameObject.GetInstanceID())
                 {
                     currentArrow.transform.forward = -this.transform.forward;
                     currentArrow.transform.position = stringNotch.transform.position;
                     currentArrow.transform.parent = stringNotch;
                     arrowScript = currentArrow.GetComponent<Arrow>();
+                    arrowLoaded = true;
                 }
                 else
                 {

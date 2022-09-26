@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour, IDamageable
 {
-    private float currentHealth, maxHealth = 6;
+    private float currentHealth, maxHealth = 5;
     public Image imago;
     private void Start()
     {
@@ -31,7 +31,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
     {
         if (currentHealth <= 0)
         {
-            PauseManager.instance.PlayerDeath();
+            GameManager.instance.PlayerDeath();
         }
     }
 }

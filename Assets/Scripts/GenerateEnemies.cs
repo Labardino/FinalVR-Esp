@@ -5,11 +5,6 @@ using UnityEngine;
 public class GenerateEnemies : MonoBehaviour
 {
     public GameObject theEnemy;
-    private int x,z;
-    public int min_x;
-    public int max_x;
-    public int min_z;
-    public int max_z;
     public Vector3 position;
 
     public static GenerateEnemies instance;

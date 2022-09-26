@@ -22,6 +22,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
 
     public void Damage(float amount)
     {
+
         LifeChange(amount);
         CheckDistance(amount);
         CheckDeath();

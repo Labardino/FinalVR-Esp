@@ -49,6 +49,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnEnable()
     {
+        toDie = false;
         this.gameObject.transform.LookAt(playerObj.transform.position);
     }
 
