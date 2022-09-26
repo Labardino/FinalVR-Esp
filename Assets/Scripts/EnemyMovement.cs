@@ -7,7 +7,7 @@ public class EnemyMovement : MonoBehaviour
 {
     public NavMeshAgent agent;
     public GameObject playerObj;
-    private BoxCollider collider;
+    public bool toDie;
 
     // Start is called before the first frame update
     void Awake()
@@ -21,14 +21,29 @@ public class EnemyMovement : MonoBehaviour
         float dist = Vector3.Distance(Vector3.zero, this.gameObject.transform.position);
         if (dist <= 2.80f)
         {
-
-            //Wait 3 seconds to die
             agent.isStopped = true;
             StartCoroutine(DelayActive());
+            if(!toDie)
+                CheckForPlayerDamage();
         }
         else
         {
             agent.SetDestination(playerObj.transform.position);
+        }
+    }
+
+    void CheckForPlayerDamage()
+    {
+        MonoBehaviour[] behaviours = playerObj.GetComponents<MonoBehaviour>();
+        foreach (MonoBehaviour behaviour in behaviours)
+        {
+            if (behaviour is IDamageable)
+            {
+                IDamageable damageable = (IDamageable)behaviour;
+                damageable.Damage(1.0f);
+                toDie = true;
+                break;
+            }
         }
     }
 

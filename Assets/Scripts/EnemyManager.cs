@@ -37,9 +37,13 @@ public class EnemyManager : MonoBehaviour, IDamageable
     public void LifeChange(float amount)
     {
         currentHealth -= amount;
-        imago.fillAmount = currentHealth / maxHealth;
+        ChangeUI();
     }
 
+    public void ChangeUI()
+    {
+        imago.fillAmount = currentHealth / maxHealth;
+    }
     public void CheckDeath()
     {
         if (currentHealth <= 0)

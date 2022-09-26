@@ -45,13 +45,6 @@ public class Arrow : MonoBehaviour
         CheckForDamage(objectHit);
 
     }
-    //IEnumerator StopArrow()
-    //{
-    //    yield return new WaitForSeconds(1f);
-    //    stopped = true;
-    //    rb.isKinematic = true;
-    //    rb.useGravity = false;
-    //}
     void CheckForDamage(GameObject objectHit)
     {
         MonoBehaviour[] behaviours = objectHit.GetComponents<MonoBehaviour>();

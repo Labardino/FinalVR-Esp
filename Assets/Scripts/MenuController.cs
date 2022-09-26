@@ -9,4 +9,10 @@ public class MenuController : MonoBehaviour
     {
         SceneManager.LoadScene("Game");
     }
+
+    public void QuitButton()
+    {
+        Application.Quit();
+        OVRManager.PlatformUIConfirmQuit();
+    }
 }
