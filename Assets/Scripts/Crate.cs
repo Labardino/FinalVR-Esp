@@ -15,20 +15,20 @@ public class Crate : MonoBehaviour, IDamageable
     {
         currentHealth = maxHealth;
         imago.fillAmount = 1;
-        //testo = FindObjectOfType<Test>();
+        testo = FindObjectOfType<Test>();
 
     }
     private void Update()
     {
-        //testo.CustomDebug((currentHealth/maxHealth).ToString());
+        testo.CustomDebug((currentHealth).ToString());
 
     }
 
     public void Damage(int amount)
     {
-        UpdateLife(amount);
         TurnRed();
-        CheckDeath();
+        UpdateLife(amount);
+        //CheckDeath();
     }
 
     public void UpdateLife(int amount)
