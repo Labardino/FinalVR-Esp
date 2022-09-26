@@ -58,7 +58,7 @@ public class Arrow : MonoBehaviour
             if(behaviour is IDamageable)
             {
                 IDamageable damageable = (IDamageable)behaviour;
-                damageable.Damage(50);
+                damageable.Damage(10);
 
                 break;
             }
