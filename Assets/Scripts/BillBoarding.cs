@@ -14,6 +14,7 @@ public class BillBoarding : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(this.transform.position - (playerpos.transform.position - this.transform.position));
+        //transform.LookAt(this.transform.position - (playerpos.transform.position - this.transform.position));
+        this.transform.LookAt(playerpos.transform.position);
     }
 }

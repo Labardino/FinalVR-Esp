@@ -9,7 +9,6 @@ public class Crate : MonoBehaviour, IDamageable
     private float maxHealth = 50, currentHealth;
     public Image imago;
     private GameObject playerObj;
-    public TextMeshProUGUI textar;
 
     //public Test testo;
     private void Start()
@@ -34,7 +33,6 @@ public class Crate : MonoBehaviour, IDamageable
     public void CheckDistance(float amountDamage)
     {
         float dist = Vector3.Distance(this.gameObject.transform.position, playerObj.transform.position);
-        textar.text = ((dist).ToString());
         float points = amountDamage * dist;
         Pointsystem.totalPoints += points;
         Pointsystem.changePoints = true;
