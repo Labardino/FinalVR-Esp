@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Oculus.Voice.Windows;
 
 public class Arrow : MonoBehaviour
 {
@@ -12,7 +11,6 @@ public class Arrow : MonoBehaviour
     private bool stopped;
     private float arrowSpeed = 1000f;
 
-    public Test testo;
 
     private void Start()
     {
@@ -38,8 +36,11 @@ public class Arrow : MonoBehaviour
         stopped = true;
 
         this.transform.parent = objectHit.transform;
+
         rb.isKinematic = true;
         rb.useGravity = false;
+
+        CheckForDamage(objectHit);
 
     }
     //IEnumerator StopArrow()
@@ -51,18 +52,29 @@ public class Arrow : MonoBehaviour
     //}
     void CheckForDamage(GameObject objectHit)
     {
+        MonoBehaviour[] behaviours = objectHit.GetComponents<MonoBehaviour>();
+        foreach(MonoBehaviour behaviour in behaviours)
+        {
+            if(behaviour is IDamageable)
+            {
+                IDamageable damageable = (IDamageable)behaviour;
+                damageable.Damage(10);
 
+                break;
+            }
+        }
     }
     public void FireArrow()
     {
+        lastPos = transform.position;
+
         stopped = false;
         this.transform.parent = null;
         this.rb.isKinematic = false;
         this.rb.useGravity = true;
 
         rb.AddForce(transform.forward * (BowAnim.blendValue * arrowSpeed));
-        testo = FindObjectOfType<Test>();
-        testo.CustomDebug();
+
 
         GrabArrow.arrowGrabbed = false;
         ShootingLogic.currentArrow = null;

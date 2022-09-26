@@ -13,8 +13,8 @@ public class Test : MonoBehaviour
 
     }
 
-    public void CustomDebug()
+    public void CustomDebug(string tex)
     {
-        texto.text = BowAnim.blendValue.ToString();
+        texto.text = tex;
     }
 }
