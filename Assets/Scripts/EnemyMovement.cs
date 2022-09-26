@@ -15,6 +15,14 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        enemy.SetDestination(new Vector3(0, 0, 0));
+        float dist = Vector3.Distance(Vector3.zero, this.gameObject.transform.position);
+        if (dist <= 1.05)
+        {
+            enemy.gameObject.SetActive(false);
+        }
+        else
+        {
+            enemy.SetDestination(new Vector3(0, 0, 0));
+        }
     }
 }
