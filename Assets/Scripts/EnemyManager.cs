@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class EnemyManager : MonoBehaviour, IDamageable
 {
-    private float maxHealth = 50, currentHealth, dist;
+    private float maxHealth = 100, currentHealth, dist;
     public Image imago;
     private GameObject playerObj;
 
@@ -44,7 +44,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
     {
         if (currentHealth <= 0)
         {
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
         }
     }
 }

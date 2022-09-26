@@ -7,6 +7,7 @@ public class EnemyMovement : MonoBehaviour
 {
     public NavMeshAgent agent;
     public GameObject playerObj;
+    private BoxCollider collider;
 
     // Start is called before the first frame update
     void Awake()
@@ -18,9 +19,11 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         float dist = Vector3.Distance(Vector3.zero, this.gameObject.transform.position);
-        if (dist <= 1.05)
+        if (dist <= 2.80f)
         {
+
             //Wait 3 seconds to die
+            agent.isStopped = true;
             StartCoroutine(DelayActive());
         }
         else

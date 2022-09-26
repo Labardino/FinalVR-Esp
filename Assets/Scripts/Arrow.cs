@@ -9,7 +9,7 @@ public class Arrow : MonoBehaviour
     public Rigidbody rb;
     private Vector3 lastPos = Vector3.zero;
     private bool stopped;
-    private float arrowSpeed = 1000f;
+    private float arrowSpeed = 2000f;
 
 
     private void Start()
@@ -24,7 +24,7 @@ public class Arrow : MonoBehaviour
         rb.MoveRotation(Quaternion.LookRotation(rb.velocity, transform.up));
 
         RaycastHit hit;
-        if (Physics.Linecast(lastPos, arrowTip.position, out hit, LayerMask.NameToLayer("Bow")))
+        if (Physics.Linecast(lastPos, arrowTip.position, out hit, LayerMask.NameToLayer("Bow"), QueryTriggerInteraction.Ignore))
         {
             StopMoving(hit.collider.gameObject);
         }
@@ -36,6 +36,8 @@ public class Arrow : MonoBehaviour
         stopped = true;
 
         this.transform.parent = objectHit.transform;
+
+        this.transform.localScale = Vector3.one * 2;
 
         rb.isKinematic = true;
         rb.useGravity = false;
@@ -58,7 +60,7 @@ public class Arrow : MonoBehaviour
             if(behaviour is IDamageable)
             {
                 IDamageable damageable = (IDamageable)behaviour;
-                damageable.Damage(10);
+                damageable.Damage(50);
 
                 break;
             }
